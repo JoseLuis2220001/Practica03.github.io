@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Encabezado con el título y el botón de Inicio -->
+    <header>
+        <button id="homeButton" class="home-button" onclick="returnToLevelSelection()" style="display: none;">Inicio</button>
+        <h1>Minesweeper</h1>
+    </header>
+
+    <!-- Contenedor de selección de nivel -->
+    <div id="levelSelection" class="level-selection">
+        <h2>Selecciona el nivel de dificultad</h2>
+        <div class="difficulty-selection">
+            <div class="level-card" onclick="startGame('easy', 5, 5)">
+                <h3>Fácil</h3>
+                <p>5 x 5</p>
+                <p>Minas: 6</p>
+            </div>
+            <div class="level-card" onclick="startGame('medium', 8, 8)">
+                <h3>Medio</h3>
+                <p>8 x 8</p>
+                <p>Minas: 9</p>
+            </div>
+            <div class="level-card" onclick="startGame('hard', 16, 16)">
+                <h3>Difícil</h3>
+                <p>16 x 16</p>
+                <p>Minas: 40</p>
+            </div>
+            <div class="level-card" onclick="startGame('hardcore', 30, 16)">
+                <h3>Extremo</h3>
+                <p>30 x 16</p>
+                <p>Minas: 99</p>
+            </div>
+            <div class="level-card" onclick="startGame('legend', 30, 24)">
+                <h3>Legendario</h3>
+                <p>30 x 24</p>
+                <p>Minas: 130</p>
+            </div>
+            <div class="level-card" onclick="selectCustomSettings()">
+                <h3>Personalizado</h3>
+                <label for="customCols">Columnas:</label>
+                <input id="customCols" type="range" min="5" max="50" value="5" oninput="updateCustomSettings()">
+                <span id="customColsValue">5</span>
+                
+                <label for="customRows">Filas:</label>
+                <input id="customRows" type="range" min="5" max="50" value="5" oninput="updateCustomSettings()">
+                <span id="customRowsValue">5</span>
+                
+                <label for="customMines">Minas:</label>
+                <input id="customMines" type="range" min="10" max="30" value="10" step="1" oninput="updateCustomSettings()">
+                <span id="customMinesValue">10% (<span id="calculatedMines">3</span>)</span>                
+                <div class="initcustom">
+                    <button onclick="startCustomGame()">Iniciar</button>
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <!-- Contenedor de información del juego -->
+    <div id="gameInfo" class="game-info" style="display: none;">
+        <p><strong>Nivel:</strong> <span id="currentLevelName"></span></p>
+        <p><strong>Minas:</strong> <span id="mineCounter"></span></p>
+        <p><strong>Tiempo:</strong> <span id="timeCounter">00:00:00</span></p>
+    </div>
+
+    <!-- Contenedor del tablero de juego -->
+    <div id="gameBoardContainer" class="game-board-container" style="display: none;">
+        <div id="game-board"></div>
+    </div>
+
+    <!-- Ventana emergente de Juego Terminado -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h4 id="modalMessage">Juego terminado!</h4> 
+            <div class="button-container">
+                <button onclick="restartGame()">Reiniciar juego</button>
+                <button onclick="closeGameOver()">Ver tablero</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
